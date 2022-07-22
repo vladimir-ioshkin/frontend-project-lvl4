@@ -2,7 +2,8 @@ import { useFormik } from 'formik';
 import { Button, Form, FloatingLabel } from 'react-bootstrap';
 import { object, string } from 'yup';
 
-export const Login = () => {
+
+export const LoginForm = () => {
   const formik = useFormik({
     initialValues: {
       username: '',

@@ -3,18 +3,25 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
+import { Authorization } from './Authorization.jsx';
 import { Home } from './Home.jsx';
-import { Login } from './Login.jsx';
+import { Header } from './Layout/Header.jsx';
+import { Main } from './Layout/Main.jsx';
 import { NotFoundPage } from './NotFoundPage.jsx';
 
 export const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="*" element={<NotFoundPage />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <div className="d-flex flex-column h-100">
+      <Header />
+      <Main>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/login" element={<Authorization />}></Route>
+            <Route path="*" element={<NotFoundPage />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </Main>
+    </div>
   );
 };

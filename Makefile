@@ -9,3 +9,6 @@ start-backend:
 
 lint:
 	npx eslint .
+
+deploy:
+	git push heroku main

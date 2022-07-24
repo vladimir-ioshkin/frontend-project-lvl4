@@ -1,0 +1,36 @@
+{
+  "translation": {
+    "authorization": {
+      "title": "Войти",
+      "username": "Ваш ник",
+      "password": "Пароль",
+      "submitButton": "Войти",
+      "footer": {
+        "text": "Нет аккаунта?",
+        "link": "Регистрация"
+      }
+    },
+
+    "notFound": {
+      "title": "Страница не найдена",
+      "text": "Но вы можете перейти",
+      "link": "на главную страницу"
+    },
+
+    "chat": {
+      "channels": "Каналы",
+      "messages": {
+        "key_one": "{{count}} сообщение",
+        "key_few": "{{count}} сообщения",
+        "key_many": "{{count}} сообщений",
+        "placeholder": "Введите сообщение..."
+      }
+    },
+
+    "errors": {
+      "noUsername": "Введите ваш ник",
+      "noPassword": "Введите пароль",
+      "login": "Неверные имя пользователя или пароль"
+    }
+  }
+}

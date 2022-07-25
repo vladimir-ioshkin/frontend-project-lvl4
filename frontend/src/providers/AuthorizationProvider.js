@@ -14,10 +14,18 @@ export const AuthorizationProvider = ({ children }) => {
     setIsLogged(false);
   };
 
+  const getUsername = () => {
+    const data = localStorage.getItem('user');
+    if (!data) return '';
+    const { username } = JSON.parse(data);
+    return username;
+  };
+
   const value = useMemo(() => ({
     isLogged,
     logIn,
     logOut,
+    getUsername,
   }), [isLogged]);
 
   return (

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -26,7 +27,7 @@ export const Messages = ({ currentChannel }) => {
           </div>
         )}
         <div className="mt-auto px-5 py-3">
-          <MessageForm />
+          <MessageForm currentChannelId={currentChannel.id} />
         </div>
       </div>
     </Col>

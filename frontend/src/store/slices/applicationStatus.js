@@ -13,16 +13,20 @@ const applicationStatusSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getData.pending, (state) => {
-        state.isLoading = 'true';
+        state.isLoading = true;
         state.errorCode = '';
       })
       .addCase(getData.rejected, (state, action) => {
-        state.isLoading = 'false';
-        state.errorCode = action.payload.error;
+        state.isLoading = false;
+        if (action.error.message.includes('401')) {
+          state.errorCode = 'errors.auth';
+          return;
+        }
+        state.errorCode = 'errors.server';
       })
       .addCase(getData.fulfilled, (state) => {
-          state.isLoading = 'false';
-          state.errorCode = '';
+        state.isLoading = false;
+        state.errorCode = '';
       });
   },
 });

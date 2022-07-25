@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +13,7 @@ export const Chat = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const channels = useSelector(selectors.selectAll);
-  const [ currentChannel, setCurrentChannel ] = useState(null);
+  const [currentChannel, setCurrentChannel] = useState(null);
 
   useEffect(() => {
     if (!isLogged) {
@@ -21,7 +21,7 @@ export const Chat = () => {
       return;
     }
     dispatch(getData());
-  }, [isLogged, navigate, dispatch]);
+  }, [isLogged]);
 
   useEffect(() => {
     setCurrentChannel(channels[0]);

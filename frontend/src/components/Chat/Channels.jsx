@@ -1,7 +1,8 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Button, Col, Nav } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { ChannelItem } from './ChannelItem';
+import { ChannelItem } from './ChannelItem.jsx';
 import { selectors } from '../../store/slices/channels.js';
 
 export const Channels = () => {

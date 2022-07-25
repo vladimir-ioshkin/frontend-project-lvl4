@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Image, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +15,7 @@ export const NotFound = () => {
         </div>
         <h1 className="h4 text-muted">{t('notFound.title')}</h1>
         <p className="text-muted">
-          {t('notFound.text')}{" "}
+          {t('notFound.text')}{' '}
           <Link to="/">{t('notFound.link')}</Link>
         </p>
       </Col>

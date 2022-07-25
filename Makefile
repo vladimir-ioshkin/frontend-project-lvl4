@@ -7,8 +7,5 @@ start-frontend:
 start-backend:
 	npx start-server -p 5001
 
-lint:
-	npx eslint .
-
 deploy:
 	git push heroku main

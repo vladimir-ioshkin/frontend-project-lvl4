@@ -1,5 +1,8 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Col, Container, Image, Row } from 'react-bootstrap';
+import {
+  Card, Col, Container, Image, Row,
+} from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { LoginForm } from './LoginForm.jsx';
 import loginImg from '../../images/login.jpeg';

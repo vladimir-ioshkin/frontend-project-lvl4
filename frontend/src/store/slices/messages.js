@@ -8,6 +8,9 @@ const initialState = messagesAdapter.getInitialState();
 const messagesSlice = createSlice({
   name: 'messages',
   initialState,
+  reducers: {
+    addMessage: messagesAdapter.addOne,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getData.fulfilled, (state, action) => {
@@ -16,10 +19,10 @@ const messagesSlice = createSlice({
   },
 });
 
-export const { actions } = messagesSlice;
+export const { addMessage } = messagesSlice.actions;
 export const selectors = messagesAdapter.getSelectors((state) => state.messages);
 export const messagesByChannelIdSelector = (currentChannelId) => createSelector(
   selectors.selectAll,
-  (messages) => messages.filter(({ channelId }) => currentChannelId === channelId)
+  (messages) => messages.filter(({ channelId }) => currentChannelId === channelId),
 );
 export default messagesSlice.reducer;

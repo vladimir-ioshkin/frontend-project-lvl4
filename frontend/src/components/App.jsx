@@ -16,6 +16,7 @@ import { Header } from './Layout/Header.jsx';
 import { NotFound } from './404/NotFound.jsx';
 import { pages } from '../routes.js';
 import { SocketProvider } from '../providers/SocketProvider.js';
+import { CurrentChannelProvider } from '../providers/CurrentChannelProvider.js';
 
 export const App = () => {
   setI18n();
@@ -25,20 +26,22 @@ export const App = () => {
   return (
     <I18nextProvider i18n={i18n}>
       <StoreProvider store={store}>
-        <SocketProvider actions={actions}>
-          <AuthorizationProvider>
-            <div className="d-flex flex-column h-100">
-              <Header />
+        <CurrentChannelProvider>
+          <SocketProvider actions={actions}>
+            <AuthorizationProvider>
               <BrowserRouter>
-                <Routes>
-                  <Route path={login} element={<Authorization />}></Route>
-                  <Route path={chat} element={<Chat />}></Route>
-                  <Route path="*" element={<NotFound />}></Route>
-                </Routes>
+                <div className="d-flex flex-column h-100">
+                  <Header />
+                  <Routes>
+                    <Route path={login} element={<Authorization />}></Route>
+                    <Route path={chat} element={<Chat />}></Route>
+                    <Route path="*" element={<NotFound />}></Route>
+                  </Routes>
+                </div>
               </BrowserRouter>
-            </div>
-          </AuthorizationProvider>
-        </SocketProvider>
+            </AuthorizationProvider>
+          </SocketProvider>
+        </CurrentChannelProvider>
       </StoreProvider>
     </I18nextProvider>
   );

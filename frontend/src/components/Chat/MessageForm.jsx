@@ -7,7 +7,7 @@ import { SocketContext } from '../../contexts/SocketContext.js';
 
 export const MessageForm = ({ currentChannelId }) => {
   const { t } = useTranslation();
-  const { sendMessage } = useContext(SocketContext);
+  const { addMessageSocket } = useContext(SocketContext);
   const { getUsername } = useContext(AuthorizationContext);
 
   const formik = useFormik({
@@ -15,7 +15,7 @@ export const MessageForm = ({ currentChannelId }) => {
       body: '',
     },
     onSubmit: async ({ body }, { resetForm }) => {
-      sendMessage({
+      addMessageSocket({
         body: body.trim(),
         channelId: currentChannelId,
         username: getUsername(),

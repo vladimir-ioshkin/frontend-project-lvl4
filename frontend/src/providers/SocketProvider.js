@@ -3,12 +3,23 @@ import { SocketContext } from '../contexts/SocketContext.js';
 
 export const SocketProvider = ({ actions, children }) => {
   const {
-    sendMessage,
+    addMessageSocket,
+    addChannelSocket,
+    removeChannelSocket,
+    renameChannelSocket,
   } = actions;
 
   const value = useMemo(() => ({
-    sendMessage,
-  }), [sendMessage]);
+    addMessageSocket,
+    addChannelSocket,
+    removeChannelSocket,
+    renameChannelSocket,
+  }), [
+    addMessageSocket,
+    addChannelSocket,
+    removeChannelSocket,
+    renameChannelSocket,
+  ]);
 
   return (
     <SocketContext.Provider value={value}>

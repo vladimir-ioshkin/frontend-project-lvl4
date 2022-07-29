@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Modal as BootstrapModal, Button, Form } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { SocketContext } from '../../contexts/SocketContext.js';
@@ -43,13 +44,13 @@ export const Modal = () => {
       formProps: {
         initialValues: { name: '' },
         validationSchema: schema,
-        onSubmit: async ({ name }, { resetForm, setSubmitting, setTouched }) => {
+        onSubmit: async ({ name }, { resetForm, setSubmitting }) => {
           const callback = ({ data }) => {
-            setCurrentChannelId(data.id);
+            toast.success(t('modal.addNotify'));
             handleClose();
+            setCurrentChannelId(data.id);
             resetForm();
             setSubmitting(false);
-            setTouched({ name: false });
           };
           addChannelSocket({ name: name.trim() }, callback);
         },
@@ -63,6 +64,7 @@ export const Modal = () => {
         initialValues: {},
         onSubmit: async (_, { setSubmitting }) => {
           const callback = () => {
+            toast.success(t('modal.removeNotify'));
             handleClose();
             setSubmitting(false);
           };
@@ -77,12 +79,12 @@ export const Modal = () => {
       formProps: {
         initialValues: { name: currentName },
         validationSchema: schema,
-        onSubmit: async ({ name }, { resetForm, setSubmitting, setTouched }) => {
+        onSubmit: async ({ name }, { resetForm, setSubmitting }) => {
           const callback = () => {
+            toast.success(t('modal.renameNotify'));
             handleClose();
             resetForm();
             setSubmitting(false);
-            setTouched({ name: false });
           };
           renameChannelSocket({ id, name: name.trim() }, callback);
         },
@@ -96,7 +98,7 @@ export const Modal = () => {
         <BootstrapModal.Title>{config[action].title}</BootstrapModal.Title>
       </BootstrapModal.Header>
 
-      <Formik {...config[action].formProps}>
+      <Formik {...config[action].formProps} validateOnBlur={false}>
         {(formik) => (
           <Form onSubmit={formik.handleSubmit}>
             <BootstrapModal.Body>
@@ -108,8 +110,9 @@ export const Modal = () => {
                     <Form.Control
                       ref={inputEl}
                       name="name"
+                      onChange={formik.handleChange}
                       {...formik.getFieldProps('name')}
-                      isInvalid={Boolean(formik.errors.name)}
+                      isInvalid={formik.touched.name && formik.errors.name}
                     />
                     <Form.Control.Feedback type="invalid">{formik.errors.name}</Form.Control.Feedback>
                   </Form.Group>

@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import { Provider as StoreProvider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
+import { ToastContainer } from 'react-toastify';
 import { AuthorizationProvider } from '../providers/AuthorizationProvider.js';
 import { SocketProvider } from '../providers/SocketProvider.js';
 import { CurrentChannelProvider } from '../providers/CurrentChannelProvider.js';
@@ -18,6 +19,9 @@ import { Chat } from './Chat/Chat.jsx';
 import { Header } from './Layout/Header.jsx';
 import { NotFound } from './404/NotFound.jsx';
 import { SignUp } from './SignUp/SignUp.jsx';
+import { Modal } from './Chat/Modal.jsx';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
   setI18n();
@@ -40,6 +44,8 @@ export const App = () => {
                     <Route path="*" element={<NotFound />}></Route>
                   </Routes>
                 </div>
+                <ToastContainer position="top-right" limit={3} />
+                <Modal />
               </BrowserRouter>
             </AuthorizationProvider>
           </SocketProvider>

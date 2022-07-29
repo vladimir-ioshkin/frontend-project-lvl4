@@ -5,6 +5,7 @@ import {
   Routes,
 } from 'react-router-dom';
 import { Provider as StoreProvider } from 'react-redux';
+import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 import { I18nextProvider } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 import filter from 'leo-profanity';
@@ -25,34 +26,43 @@ import { Modal } from './Chat/Modal.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
+  const rollbarConfig = {
+    accessToken: process.env.ROLLBAR_ACCESS_TOKEN,
+    environment: 'production',
+  };
+
   filter.loadDictionary('ru');
   setI18n();
   const actions = initSocket();
   const { login, chat, signup } = pages;
 
   return (
-    <I18nextProvider i18n={i18n}>
-      <StoreProvider store={store}>
-        <CurrentChannelProvider>
-          <SocketProvider actions={actions}>
-            <AuthorizationProvider>
-              <BrowserRouter>
-                <div className="d-flex flex-column h-100">
-                  <Header />
-                  <Routes>
-                    <Route path={login} element={<Authorization />}></Route>
-                    <Route path={chat} element={<Chat />}></Route>
-                    <Route path={signup} element={<SignUp />}></Route>
-                    <Route path="*" element={<NotFound />}></Route>
-                  </Routes>
-                </div>
-                <ToastContainer position="top-right" limit={3} />
-                <Modal />
-              </BrowserRouter>
-            </AuthorizationProvider>
-          </SocketProvider>
-        </CurrentChannelProvider>
-      </StoreProvider>
-    </I18nextProvider>
+    <RollbarProvider config={rollbarConfig}>
+      <ErrorBoundary errorMessage="Error in React render">
+        <I18nextProvider i18n={i18n}>
+          <StoreProvider store={store}>
+            <CurrentChannelProvider>
+              <SocketProvider actions={actions}>
+                <AuthorizationProvider>
+                  <BrowserRouter>
+                    <div className="d-flex flex-column h-100">
+                      <Header />
+                      <Routes>
+                        <Route path={login} element={<Authorization />}></Route>
+                        <Route path={chat} element={<Chat />}></Route>
+                        <Route path={signup} element={<SignUp />}></Route>
+                        <Route path="*" element={<NotFound />}></Route>
+                      </Routes>
+                    </div>
+                    <ToastContainer position="top-right" limit={3} />
+                    <Modal />
+                  </BrowserRouter>
+                </AuthorizationProvider>
+              </SocketProvider>
+            </CurrentChannelProvider>
+          </StoreProvider>
+        </I18nextProvider>
+      </ErrorBoundary>
+    </RollbarProvider>
   );
 };

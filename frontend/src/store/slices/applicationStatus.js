@@ -6,6 +6,7 @@ const initialState = {
   lng: 'ru',
   isLoading: false,
   errorCode: '',
+  error: null,
 };
 
 const applicationStatusSlice = createSlice({
@@ -17,13 +18,14 @@ const applicationStatusSlice = createSlice({
         state.isLoading = true;
         state.errorCode = '';
       })
-      .addCase(getDataRequest.rejected, (state, action) => {
+      .addCase(getDataRequest.rejected, (state, { error }) => {
         state.isLoading = false;
-        if (action.error.message.includes(AUTH_ERROR_CODE)) {
+        if (error.message.includes(AUTH_ERROR_CODE)) {
           state.errorCode = AUTH_ERROR_CODE;
           return;
         }
         state.errorCode = 'errors.server';
+        state.error = error;
       })
       .addCase(getDataRequest.fulfilled, (state) => {
         state.isLoading = false;
@@ -35,4 +37,5 @@ const applicationStatusSlice = createSlice({
 export const { actions } = applicationStatusSlice;
 export const isLoadingSelector = (state) => state.applicationStatus.isLoading;
 export const errorCodeSelector = (state) => state.applicationStatus.errorCode;
+export const errorSelector = (state) => state.applicationStatus.error;
 export default applicationStatusSlice.reducer;

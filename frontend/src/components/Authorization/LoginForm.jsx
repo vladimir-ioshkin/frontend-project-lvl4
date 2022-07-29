@@ -3,8 +3,10 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button, Form, FloatingLabel } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useRollbar } from '@rollbar/react';
 import { AuthorizationContext } from '../../contexts/AuthorizationContext.js';
 import { apiRoutes, pages } from '../../routes.js';
 import { AUTH_ERROR_CODE } from '../../constants.js';
@@ -12,6 +14,7 @@ import { AUTH_ERROR_CODE } from '../../constants.js';
 export const LoginForm = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const rollbar = useRollbar();
   const { logIn } = useContext(AuthorizationContext);
 
   const [isError, setIsError] = useState(false);
@@ -34,7 +37,10 @@ export const LoginForm = () => {
       } catch (error) {
         if (error.message.includes(AUTH_ERROR_CODE)) {
           setIsError(true);
+          return;
         }
+        toast.error(t('errors.server'));
+        rollbar.error(t('errors.server'), error, { username, password });
       } finally {
         setSubmitting(false);
       }

@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import { useRollbar } from '@rollbar/react';
 import { useTranslation } from 'react-i18next';
 import { AuthorizationContext } from '../../contexts/AuthorizationContext.js';
 import { pages } from '../../routes.js';
 import { getDataRequest } from '../../store/thunks/index.js';
-import { errorCodeSelector } from '../../store/slices/applicationStatus';
+import { errorCodeSelector, errorSelector } from '../../store/slices/applicationStatus';
 import { Channels } from './Channels.jsx';
 import { Messages } from './Messages.jsx';
 import { AUTH_ERROR_CODE } from '../../constants.js';
@@ -16,11 +17,13 @@ export const Chat = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const rollbar = useRollbar();
   const { isLogged, logOut } = useContext(AuthorizationContext);
   const errorCode = useSelector(errorCodeSelector);
+  const error = useSelector(errorSelector);
 
   useEffect(() => {
-    if (!isLogged || errorCode === AUTH_ERROR_CODE) {
+    if (!isLogged) {
       logOut();
       navigate(pages.login);
       return;
@@ -39,6 +42,7 @@ export const Chat = () => {
     }
 
     toast.error(t(errorCode));
+    rollbar.error(t(errorCode), error);
   }, [errorCode]);
 
   return (

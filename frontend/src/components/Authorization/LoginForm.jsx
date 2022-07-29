@@ -1,39 +1,38 @@
 import React, { useContext, useState } from 'react';
-import { useFormik } from 'formik';
-import { Button, Form, FloatingLabel } from 'react-bootstrap';
-import { object, string } from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { apiRoutes, pages } from '../../routes.js';
+import { Button, Form, FloatingLabel } from 'react-bootstrap';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import { AuthorizationContext } from '../../contexts/AuthorizationContext.js';
+import { apiRoutes, pages } from '../../routes.js';
+import { AUTH_ERROR_CODE } from '../../constants.js';
 
 export const LoginForm = () => {
-  const [isError, setIsError] = useState(false);
-  const { logIn } = useContext(AuthorizationContext);
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { logIn } = useContext(AuthorizationContext);
+
+  const [isError, setIsError] = useState(false);
 
   const formik = useFormik({
     initialValues: {
       username: '',
       password: '',
     },
-    validationSchema: object({
-      username: string().required(),
-      password: string().required(),
+    validationSchema: yup.object({
+      username: yup.string().required(t('errors.noUsername')),
+      password: yup.string().required(t('errors.noPassword')),
     }),
-    onSubmit: async (values, { setSubmitting }) => {
+    onSubmit: async ({ username, password }, { setSubmitting }) => {
       try {
-        const response = await axios.post(apiRoutes.loginPath(), values);
+        const response = await axios.post(apiRoutes.loginPath(), { username, password });
         const { token } = response.data;
-        logIn({
-          token,
-          username: values.username,
-        });
+        logIn({ token, username });
         navigate(pages.chat);
       } catch (error) {
-        if (error.message.includes('401')) {
+        if (error.message.includes(AUTH_ERROR_CODE)) {
           setIsError(true);
         }
       } finally {
@@ -42,23 +41,26 @@ export const LoginForm = () => {
     },
   });
 
+  const handleChange = (e) => {
+    setIsError(false);
+    formik.handleChange(e);
+  };
+
   return (
     <Form onSubmit={formik.handleSubmit} className="col-12 col-md-6 mt-3 mt-mb-0">
       <h1 className="text-center mb-4">{t('authorization.title')}</h1>
       <Form.Group className="form-floating mb-3">
         <FloatingLabel controlId="username" label={t('authorization.username')}>
           <Form.Control
-            onChange={(e) => {
-              setIsError(false);
-              formik.handleChange(e);
-            }}
+            autoFocus
+            onChange={handleChange}
             value={formik.values.username}
             name="username"
             autoComplete="username"
             isInvalid={(formik.touched.username && formik.errors.username) || isError}
           />
           {!isError && <Form.Control.Feedback type="invalid">
-            {t('errors.noUsername')}
+            {formik.errors.username}
           </Form.Control.Feedback>}
         </FloatingLabel>
       </Form.Group>
@@ -66,17 +68,14 @@ export const LoginForm = () => {
         <FloatingLabel controlId="password" label={t('authorization.password')}>
           <Form.Control
             type="password"
-            onChange={(e) => {
-              setIsError(false);
-              formik.handleChange(e);
-            }}
+            onChange={handleChange}
             value={formik.values.password}
             name="password"
             autoComplete="current-password"
             isInvalid={(formik.touched.password && formik.errors.password) || isError}
           />
           {!isError && <Form.Control.Feedback type="invalid">
-            {t('errors.noPassword')}
+            {formik.errors.password}
           </Form.Control.Feedback>}
         </FloatingLabel>
       </Form.Group>

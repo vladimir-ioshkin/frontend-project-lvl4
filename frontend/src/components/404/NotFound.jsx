@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Col, Image, Row } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { Col, Image, Row } from 'react-bootstrap';
 import pageNotFoundImg from '../../images/pageNotFound.jpg';
 
 export const NotFound = () => {

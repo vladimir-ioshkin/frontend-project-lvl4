@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   Card, Col, Container, Image, Row,
 } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
-import { LoginForm } from './LoginForm.jsx';
 import loginImg from '../../images/login.jpeg';
+import { LoginForm } from './LoginForm.jsx';
 
 export const Authorization = () => {
   const { t } = useTranslation();

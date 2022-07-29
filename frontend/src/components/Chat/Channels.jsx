@@ -1,24 +1,23 @@
 import React, { useContext, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Col, Nav } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { Button, Col, Nav } from 'react-bootstrap';
 import { CurrentChannelContext } from '../../contexts/CurrentChannelContext.js';
-import { ChannelItem } from './ChannelItem.jsx';
 import { selectors } from '../../store/slices/channels.js';
 import { openModal } from '../../store/slices/modal.js';
+import { ChannelItem } from './ChannelItem.jsx';
 
 export const Channels = () => {
   const { t } = useTranslation();
-  const { setCurrentChannelId } = useContext(CurrentChannelContext);
-  const channels = useSelector(selectors.selectAll);
   const dispatch = useDispatch();
-  const handleClick = () => {
-    dispatch(openModal({ action: 'add' }));
-  };
+  const { setDefaultChannel } = useContext(CurrentChannelContext);
+
+  const channels = useSelector(selectors.selectAll);
+  const handleClick = () => dispatch(openModal({ action: 'add' }));
 
   useEffect(() => {
     if (channels.length) {
-      setCurrentChannelId(1);
+      setDefaultChannel();
     }
   }, [channels]);
 

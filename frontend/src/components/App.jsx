@@ -6,18 +6,18 @@ import {
 } from 'react-router-dom';
 import { Provider as StoreProvider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
+import { AuthorizationProvider } from '../providers/AuthorizationProvider.js';
+import { SocketProvider } from '../providers/SocketProvider.js';
+import { CurrentChannelProvider } from '../providers/CurrentChannelProvider.js';
 import { initSocket } from '../socket.js';
 import store from '../store/index.js';
-import { i18n, setI18n } from '../i18n';
-import { AuthorizationProvider } from '../providers/AuthorizationProvider.js';
+import { i18n, setI18n } from '../i18n.js';
+import { pages } from '../routes.js';
 import { Authorization } from './Authorization/Authorization.jsx';
 import { Chat } from './Chat/Chat.jsx';
 import { Header } from './Layout/Header.jsx';
 import { NotFound } from './404/NotFound.jsx';
 import { SignUp } from './SignUp/SignUp.jsx';
-import { pages } from '../routes.js';
-import { SocketProvider } from '../providers/SocketProvider.js';
-import { CurrentChannelProvider } from '../providers/CurrentChannelProvider.js';
 
 export const App = () => {
   setI18n();

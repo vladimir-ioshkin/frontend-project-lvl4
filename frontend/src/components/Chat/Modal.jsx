@@ -1,27 +1,24 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { Modal as BootstrapModal, Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { Modal as BootstrapModal, Button, Form } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { modalIsOpenSelector, modalChannelSelector, closeModal } from '../../store/slices/modal.js';
 import { SocketContext } from '../../contexts/SocketContext.js';
 import { CurrentChannelContext } from '../../contexts/CurrentChannelContext.js';
 import { selectors } from '../../store/slices/channels.js';
+import { modalIsOpenSelector, modalChannelSelector, closeModal } from '../../store/slices/modal.js';
 
 export const Modal = () => {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const { addChannelSocket, removeChannelSocket, renameChannelSocket } = useContext(SocketContext);
+  const { setCurrentChannelId } = useContext(CurrentChannelContext);
+
   const isOpen = useSelector(modalIsOpenSelector);
   const { action, id, name: currentName } = useSelector(modalChannelSelector);
-  const { setCurrentChannelId } = useContext(CurrentChannelContext);
   const channels = useSelector(selectors.selectAll);
-  const dispatch = useDispatch();
   const inputEl = useRef();
-
-  const handleClose = () => {
-    dispatch(closeModal());
-  };
 
   useEffect(() => {
     if (isOpen && inputEl?.current && action !== 'remove') {
@@ -30,43 +27,41 @@ export const Modal = () => {
     }
   }, [isOpen, action]);
 
-  yup.setLocale({
-    mixed: {
-      required: t('modal.requiredError'),
-      notOneOf: t('modal.existError'),
-    },
-  });
+  const handleClose = () => dispatch(closeModal());
 
   const schema = yup.object({
-    name: yup.string().required().notOneOf(channels.map(({ name }) => name)),
+    name: yup.string()
+      .required(t('modal.requiredError'))
+      .notOneOf(channels.map(({ name }) => name), t('modal.existError')),
   });
 
   const config = {
     add: {
-      titleCode: 'modal.addTitle',
-      btnTextCode: 'modal.addBtn',
+      title: t('modal.addTitle'),
+      btnText: t('modal.addBtn'),
       btnVariant: 'primary',
       formProps: {
         initialValues: { name: '' },
         validationSchema: schema,
-        onSubmit: async ({ name }, { resetForm }) => {
+        onSubmit: async ({ name }, { resetForm, setSubmitting, setTouched }) => {
           const callback = ({ data }) => {
             setCurrentChannelId(data.id);
             handleClose();
             resetForm();
             setSubmitting(false);
+            setTouched({ name: false });
           };
           addChannelSocket({ name: name.trim() }, callback);
         },
       },
     },
     remove: {
-      titleCode: 'modal.removeTitle',
-      btnTextCode: 'modal.removeBtn',
+      title: t('modal.removeTitle'),
+      btnText: t('modal.removeBtn'),
       btnVariant: 'danger',
       formProps: {
         initialValues: {},
-        onSubmit: async () => {
+        onSubmit: async (_, { setSubmitting }) => {
           const callback = () => {
             handleClose();
             setSubmitting(false);
@@ -76,17 +71,18 @@ export const Modal = () => {
       },
     },
     rename: {
-      titleCode: 'modal.renameTitle',
-      btnTextCode: 'modal.addBtn',
+      title: t('modal.renameTitle'),
+      btnText: t('modal.addBtn'),
       btnVariant: 'primary',
       formProps: {
         initialValues: { name: currentName },
         validationSchema: schema,
-        onSubmit: async ({ name }, { resetForm, setSubmitting }) => {
+        onSubmit: async ({ name }, { resetForm, setSubmitting, setTouched }) => {
           const callback = () => {
             handleClose();
             resetForm();
             setSubmitting(false);
+            setTouched({ name: false });
           };
           renameChannelSocket({ id, name: name.trim() }, callback);
         },
@@ -97,7 +93,7 @@ export const Modal = () => {
   return (
     <BootstrapModal show={isOpen} backdrop="static" onHide={handleClose}>
       <BootstrapModal.Header closeButton>
-        <BootstrapModal.Title>{t(config[action].titleCode)}</BootstrapModal.Title>
+        <BootstrapModal.Title>{config[action].title}</BootstrapModal.Title>
       </BootstrapModal.Header>
 
       <Formik {...config[action].formProps}>
@@ -113,7 +109,7 @@ export const Modal = () => {
                       ref={inputEl}
                       name="name"
                       {...formik.getFieldProps('name')}
-                      isInvalid={(formik.touched.name && formik.errors.name)}
+                      isInvalid={Boolean(formik.errors.name)}
                     />
                     <Form.Control.Feedback type="invalid">{formik.errors.name}</Form.Control.Feedback>
                   </Form.Group>
@@ -127,7 +123,7 @@ export const Modal = () => {
                 type="submit"
                 disabled={formik.isSubmitting}
               >
-                {t(config[action].btnTextCode)}
+                {config[action].btnText}
               </Button>
             </BootstrapModal.Footer>
           </Form>

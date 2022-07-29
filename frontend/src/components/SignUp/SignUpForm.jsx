@@ -1,18 +1,19 @@
 import React, { useContext, useState } from 'react';
-import { useFormik } from 'formik';
-import { Button, Form, FloatingLabel } from 'react-bootstrap';
-import * as yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { apiRoutes, pages } from '../../routes.js';
+import { Button, Form, FloatingLabel } from 'react-bootstrap';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import { AuthorizationContext } from '../../contexts/AuthorizationContext.js';
+import { CONFLICT_ERROR_CODE } from '../../constants.js';
+import { apiRoutes, pages } from '../../routes.js';
 
 export const SignUpForm = () => {
-  const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { logIn } = useContext(AuthorizationContext);
+  const [isError, setIsError] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -39,7 +40,7 @@ export const SignUpForm = () => {
         logIn({ token, username });
         navigate(pages.chat);
       } catch (error) {
-        if (error.message.includes('409')) {
+        if (error.message.includes(CONFLICT_ERROR_CODE)) {
           setIsError(true);
         }
       } finally {
@@ -77,11 +78,9 @@ export const SignUpForm = () => {
             value={formik.values.password}
             name="password"
             autoComplete="current-password"
-            isInvalid={(formik.touched.password && formik.errors.password)}
+            isInvalid={formik.touched.password && formik.errors.password}
           />
-          {<Form.Control.Feedback type="invalid">
-            {formik.errors.password}
-          </Form.Control.Feedback>}
+          <Form.Control.Feedback type="invalid">{formik.errors.password}</Form.Control.Feedback>
         </FloatingLabel>
       </Form.Group>
       <Form.Group className="form-floating mb-4">
@@ -91,11 +90,9 @@ export const SignUpForm = () => {
             onChange={formik.handleChange}
             value={formik.values.confirmPassword}
             name="confirmPassword"
-            isInvalid={(formik.touched.confirmPassword && formik.errors.confirmPassword)}
+            isInvalid={formik.touched.confirmPassword && formik.errors.confirmPassword}
           />
-          {<Form.Control.Feedback type="invalid">
-            {formik.errors.confirmPassword}
-          </Form.Control.Feedback>}
+          <Form.Control.Feedback type="invalid">{formik.errors.confirmPassword}</Form.Control.Feedback>
         </FloatingLabel>
       </Form.Group>
       <Button

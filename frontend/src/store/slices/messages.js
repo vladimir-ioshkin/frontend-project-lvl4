@@ -1,5 +1,5 @@
 import { createSelector, createSlice, createEntityAdapter } from '@reduxjs/toolkit';
-import { getData } from './channels.js';
+import { getDataRequest } from '../thunks/index.js';
 
 const messagesAdapter = createEntityAdapter();
 
@@ -13,7 +13,7 @@ const messagesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getData.fulfilled, (state, action) => {
+      .addCase(getDataRequest.fulfilled, (state, action) => {
         messagesAdapter.addMany(state, action.payload.messages);
       });
   },

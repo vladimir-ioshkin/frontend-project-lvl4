@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
+import { useFormik } from 'formik';
 import { AuthorizationContext } from '../../contexts/AuthorizationContext.js';
 import { SocketContext } from '../../contexts/SocketContext.js';
 

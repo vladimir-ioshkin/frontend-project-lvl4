@@ -1,18 +1,18 @@
 import React, { useContext } from 'react';
-import { Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { Col } from 'react-bootstrap';
+import { CurrentChannelContext } from '../../contexts/CurrentChannelContext.js';
 import { messagesByChannelIdSelector } from '../../store/slices/messages.js';
+import { selectors } from '../../store/slices/channels.js';
 import { MessageItem } from './MessageItem.jsx';
 import { MessageForm } from './MessageForm.jsx';
-import { selectors } from '../../store/slices/channels.js';
-import { CurrentChannelContext } from '../../contexts/CurrentChannelContext.js';
 
 export const Messages = () => {
+  const { t } = useTranslation();
   const { currentChannelId } = useContext(CurrentChannelContext);
   const messages = useSelector(messagesByChannelIdSelector(currentChannelId));
   const currentChannel = useSelector((state) => selectors.selectById(state, currentChannelId));
-  const { t } = useTranslation();
 
   if (!currentChannel) {
     return null;

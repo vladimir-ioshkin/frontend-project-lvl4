@@ -1,5 +1,9 @@
 {
   "translation": {
+    "header": {
+      "unAuthorize": "Выйти"
+    },
+    
     "authorization": {
       "title": "Войти",
       "username": "Ваш ник",
@@ -27,12 +31,25 @@
       }
     },
 
+    "signUp": {
+      "title" : "Регистрация",
+      "username": "Имя пользователя",
+      "password": "Пароль",
+      "confirmPassword": "Подтвердите пароль",
+      "submitButton": "Зарегистрироваться"
+    },
+
     "errors": {
+      "required": "Обязательное поле",
       "noUsername": "Введите ваш ник",
       "noPassword": "Введите пароль",
       "login": "Неверные имя пользователя или пароль",
       "auth": "Ошибка авторизации",
-      "server": "Ошибка сервера. Попробуйте снова"
+      "server": "Ошибка сервера. Попробуйте снова",
+      "usernameMinMax": "От {{min}} до {{max}} символов",
+      "passwordMin": "Не менее {{min}} символов",
+      "confirmPassword": "Пароли должны совпадать",
+      "userExists": "Такой пользователь уже существует"
     },
 
     "modal": {

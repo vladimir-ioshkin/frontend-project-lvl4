@@ -54,6 +54,7 @@ export const Modal = () => {
             setCurrentChannelId(data.id);
             handleClose();
             resetForm();
+            setSubmitting(false);
           };
           addChannelSocket({ name: name.trim() }, callback);
         },
@@ -68,6 +69,7 @@ export const Modal = () => {
         onSubmit: async () => {
           const callback = () => {
             handleClose();
+            setSubmitting(false);
           };
           removeChannelSocket({ id }, callback);
         },
@@ -80,10 +82,11 @@ export const Modal = () => {
       formProps: {
         initialValues: { name: currentName },
         validationSchema: schema,
-        onSubmit: async ({ name }, { resetForm }) => {
+        onSubmit: async ({ name }, { resetForm, setSubmitting }) => {
           const callback = () => {
             handleClose();
             resetForm();
+            setSubmitting(false);
           };
           renameChannelSocket({ id, name: name.trim() }, callback);
         },
@@ -119,7 +122,13 @@ export const Modal = () => {
 
             <BootstrapModal.Footer>
               <Button variant="secondary" onClick={handleClose}>{t('modal.cancelBtn')}</Button>
-              <Button variant={config[action].btnVariant} type="submit">{t(config[action].btnTextCode)}</Button>
+              <Button
+                variant={config[action].btnVariant}
+                type="submit"
+                disabled={formik.isSubmitting}
+              >
+                {t(config[action].btnTextCode)}
+              </Button>
             </BootstrapModal.Footer>
           </Form>
         )}

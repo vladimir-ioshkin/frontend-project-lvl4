@@ -14,12 +14,16 @@ export const MessageForm = ({ currentChannelId }) => {
     initialValues: {
       body: '',
     },
-    onSubmit: async ({ body }, { resetForm }) => {
+    onSubmit: async ({ body }, { resetForm, setSubmitting }) => {
+      const callback = () => {
+        resetForm();
+        setSubmitting(false);
+      };
       addMessageSocket({
         body: body.trim(),
         channelId: currentChannelId,
         username: getUsername(),
-      }, resetForm);
+      }, callback);
     },
   });
 
@@ -39,7 +43,7 @@ export const MessageForm = ({ currentChannelId }) => {
           variant="outline-secondary"
           size="sm"
           style={{ width: '24px' }}
-          disabled={!formik.values.body}
+          disabled={!formik.values.body || formik.isSubmitting}
         >
           &#10132;
         </Button>

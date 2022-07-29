@@ -33,7 +33,9 @@ export const LoginForm = () => {
         });
         navigate(pages.chat);
       } catch (error) {
-        setIsError(true);
+        if (error.message.includes('401')) {
+          setIsError(true);
+        }
       } finally {
         setSubmitting(false);
       }
@@ -46,7 +48,10 @@ export const LoginForm = () => {
       <Form.Group className="form-floating mb-3">
         <FloatingLabel controlId="username" label={t('authorization.username')}>
           <Form.Control
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              setIsError(false);
+              formik.handleChange(e);
+            }}
             value={formik.values.username}
             name="username"
             autoComplete="username"
@@ -61,7 +66,10 @@ export const LoginForm = () => {
         <FloatingLabel controlId="password" label={t('authorization.password')}>
           <Form.Control
             type="password"
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              setIsError(false);
+              formik.handleChange(e);
+            }}
             value={formik.values.password}
             name="password"
             autoComplete="current-password"
@@ -72,8 +80,15 @@ export const LoginForm = () => {
           </Form.Control.Feedback>}
         </FloatingLabel>
       </Form.Group>
-      <Button type="submit" variant="outline-primary" className="w-100 mb-3">{t('authorization.submitButton')}</Button>
-      {isError ? <Form.Text className="text-danger">{t('errors.login')}</Form.Text> : null}
+      <Button
+        type="submit"
+        variant="outline-primary"
+        className="w-100 mb-3"
+        disabled={formik.isSubmitting}
+      >
+        {t('authorization.submitButton')}
+      </Button>
+      {isError && <Form.Text className="text-danger">{t('errors.login')}</Form.Text>}
     </Form>
   );
 };

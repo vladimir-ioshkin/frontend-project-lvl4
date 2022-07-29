@@ -5,6 +5,7 @@ import { Modal as BootstrapModal, Button, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import filter from 'leo-profanity';
 import { SocketContext } from '../../contexts/SocketContext.js';
 import { CurrentChannelContext } from '../../contexts/CurrentChannelContext.js';
 import { selectors } from '../../store/slices/channels.js';
@@ -15,7 +16,6 @@ export const Modal = () => {
   const { t } = useTranslation();
   const { addChannelSocket, removeChannelSocket, renameChannelSocket } = useContext(SocketContext);
   const { setCurrentChannelId } = useContext(CurrentChannelContext);
-
   const isOpen = useSelector(modalIsOpenSelector);
   const { action, id, name: currentName } = useSelector(modalChannelSelector);
   const channels = useSelector(selectors.selectAll);
@@ -52,7 +52,7 @@ export const Modal = () => {
             resetForm();
             setSubmitting(false);
           };
-          addChannelSocket({ name: name.trim() }, callback);
+          addChannelSocket({ name: filter.clean(name.trim(), '*') }, callback);
         },
       },
     },
@@ -86,7 +86,7 @@ export const Modal = () => {
             resetForm();
             setSubmitting(false);
           };
-          renameChannelSocket({ id, name: name.trim() }, callback);
+          renameChannelSocket({ id, name: filter.clean(name.trim(), '*') }, callback);
         },
       },
     },

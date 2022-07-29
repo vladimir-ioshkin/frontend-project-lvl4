@@ -7,6 +7,7 @@ import {
 import { Provider as StoreProvider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
+import filter from 'leo-profanity';
 import { AuthorizationProvider } from '../providers/AuthorizationProvider.js';
 import { SocketProvider } from '../providers/SocketProvider.js';
 import { CurrentChannelProvider } from '../providers/CurrentChannelProvider.js';
@@ -24,6 +25,7 @@ import { Modal } from './Chat/Modal.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
+  filter.loadDictionary('ru');
   setI18n();
   const actions = initSocket();
   const { login, chat, signup } = pages;

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
+import filter from 'leo-profanity';
 import { AuthorizationContext } from '../../contexts/AuthorizationContext.js';
 import { SocketContext } from '../../contexts/SocketContext.js';
 
@@ -20,7 +21,7 @@ export const MessageForm = ({ currentChannelId }) => {
         setSubmitting(false);
       };
       addMessageSocket({
-        body: body.trim(),
+        body: filter.clean(body.trim(), '*'),
         channelId: currentChannelId,
         username: getUsername(),
       }, callback);

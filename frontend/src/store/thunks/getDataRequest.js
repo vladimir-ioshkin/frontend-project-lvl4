@@ -16,4 +16,4 @@ const getDataRequest = createAsyncThunk(
   },
 );
 
-export default { getDataRequest };
+export default getDataRequest;

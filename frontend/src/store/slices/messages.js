@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSelector, createSlice, createEntityAdapter } from '@reduxjs/toolkit';
-import { getDataRequest } from '../thunks/index.js';
+import getDataRequest from '../thunks/getDataRequest.js';
 import { currentChannelIdSelector } from './channels.js';
 
 const messagesAdapter = createEntityAdapter();

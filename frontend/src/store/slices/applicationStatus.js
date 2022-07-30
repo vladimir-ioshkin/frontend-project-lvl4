@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import { AUTH_ERROR_CODE } from '../../constants.js';
-import { getDataRequest } from '../thunks/index.js';
+import getDataRequest from '../thunks/getDataRequest.js';
 
 const initialState = {
   lng: 'ru',

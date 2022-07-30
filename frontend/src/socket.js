@@ -1,12 +1,11 @@
-import { useContext } from 'react';
 import { io } from 'socket.io-client';
-import { CurrentChannelContext } from './contexts/CurrentChannelContext.js';
 import { addMessage } from './store/slices/messages.js';
-import { addChannel, removeChannel, renameChannel } from './store/slices/channels';
+import {
+  addChannel, removeChannel, renameChannel, setDefaultChannel,
+} from './store/slices/channels';
 import store from './store';
 
 export const initSocket = () => {
-  const { currentChannelId, setDefaultChannel } = useContext(CurrentChannelContext);
   const socket = io();
 
   socket.on('newMessage', (payload) => {
@@ -19,8 +18,11 @@ export const initSocket = () => {
 
   socket.on('removeChannel', ({ id }) => {
     store.dispatch(removeChannel(id));
+
+    const { channels: { currentChannelId } } = store.getState();
+
     if (currentChannelId === id) {
-      setDefaultChannel();
+      store.dispatch(setDefaultChannel());
     }
   });
 

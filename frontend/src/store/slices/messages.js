@@ -1,5 +1,6 @@
 import { createSelector, createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 import { getDataRequest } from '../thunks/index.js';
+import { currentChannelIdSelector } from './channels.js';
 
 const messagesAdapter = createEntityAdapter();
 
@@ -21,8 +22,11 @@ const messagesSlice = createSlice({
 
 export const { addMessage } = messagesSlice.actions;
 export const selectors = messagesAdapter.getSelectors((state) => state.messages);
-export const messagesByChannelIdSelector = (currentChannelId) => createSelector(
+export const currentChannelMessagesSelector = createSelector(
   selectors.selectAll,
-  (messages) => messages.filter(({ channelId }) => currentChannelId === channelId),
+  currentChannelIdSelector,
+  (messages, currentChannelId) => messages.filter(
+    ({ channelId }) => currentChannelId === channelId,
+  ),
 );
 export default messagesSlice.reducer;

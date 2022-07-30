@@ -1,18 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Col } from 'react-bootstrap';
-import { CurrentChannelContext } from '../../contexts/CurrentChannelContext.js';
-import { messagesByChannelIdSelector } from '../../store/slices/messages.js';
-import { selectors } from '../../store/slices/channels.js';
+import { currentChannelMessagesSelector } from '../../store/slices/messages.js';
+import { currentChannelSelector } from '../../store/slices/channels.js';
 import { MessageItem } from './MessageItem.jsx';
 import { MessageForm } from './MessageForm.jsx';
 
 export const Messages = () => {
   const { t } = useTranslation();
-  const { currentChannelId } = useContext(CurrentChannelContext);
-  const messages = useSelector(messagesByChannelIdSelector(currentChannelId));
-  const currentChannel = useSelector((state) => selectors.selectById(state, currentChannelId));
+  const messages = useSelector(currentChannelMessagesSelector);
+  const currentChannel = useSelector(currentChannelSelector);
 
   if (!currentChannel) {
     return null;
@@ -35,7 +33,7 @@ export const Messages = () => {
           </div>
         )}
         <div className="mt-auto px-5 py-3">
-          <MessageForm currentChannelId={currentChannelId} />
+          <MessageForm />
         </div>
       </div>
     </Col>

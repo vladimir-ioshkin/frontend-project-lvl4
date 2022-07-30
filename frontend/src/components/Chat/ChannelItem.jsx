@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import {
   Button,
@@ -7,14 +7,15 @@ import {
   Nav,
   ButtonGroup,
 } from 'react-bootstrap';
-import { CurrentChannelContext } from '../../contexts/CurrentChannelContext.js';
 import { openModal } from '../../store/slices/modal.js';
+import { setCurrentChannelId, currentChannelIdSelector } from '../../store/slices/channels.js';
 
 export const ChannelItem = ({ name, removable, id }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { currentChannelId, setCurrentChannelId } = useContext(CurrentChannelContext);
+  const currentChannelId = useSelector(currentChannelIdSelector);
 
+  const handleClick = () => dispatch(setCurrentChannelId({ id }));
   const removeChannel = () => dispatch(openModal({ action: 'remove', id }));
   const renameChannel = () => dispatch(openModal({ action: 'rename', id, name }));
   const classes = 'w-100 rounded-0 text-start';
@@ -23,7 +24,7 @@ export const ChannelItem = ({ name, removable, id }) => {
 
   const btn = removable ? (
     <Dropdown as={ButtonGroup} className={classes}>
-      <Button variant={variant} className={classes} onClick={() => setCurrentChannelId(id)}>
+      <Button variant={variant} className={classes.concat(' text-truncate')} onClick={handleClick}>
         {displayName}
       </Button>
       <Dropdown.Toggle split id={id} variant={variant} />
@@ -33,7 +34,7 @@ export const ChannelItem = ({ name, removable, id }) => {
       </Dropdown.Menu>
     </Dropdown>
   ) : (
-    <Button variant={variant} className={classes} onClick={() => setCurrentChannelId(id)}>
+    <Button variant={variant} className={classes.concat(' text-truncate')} onClick={handleClick}>
       {displayName}
     </Button>
   );

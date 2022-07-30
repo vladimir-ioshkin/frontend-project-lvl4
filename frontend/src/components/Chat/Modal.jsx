@@ -7,15 +7,13 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import filter from 'leo-profanity';
 import { SocketContext } from '../../contexts/SocketContext.js';
-import { CurrentChannelContext } from '../../contexts/CurrentChannelContext.js';
-import { selectors } from '../../store/slices/channels.js';
+import { selectors, setCurrentChannelId } from '../../store/slices/channels.js';
 import { modalIsOpenSelector, modalChannelSelector, closeModal } from '../../store/slices/modal.js';
 
 export const Modal = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { addChannelSocket, removeChannelSocket, renameChannelSocket } = useContext(SocketContext);
-  const { setCurrentChannelId } = useContext(CurrentChannelContext);
   const isOpen = useSelector(modalIsOpenSelector);
   const { action, id, name: currentName } = useSelector(modalChannelSelector);
   const channels = useSelector(selectors.selectAll);
@@ -48,7 +46,7 @@ export const Modal = () => {
           const callback = ({ data }) => {
             toast.success(t('modal.addNotify'));
             handleClose();
-            setCurrentChannelId(data.id);
+            dispatch(setCurrentChannelId({ id: data.id }));
             resetForm();
             setSubmitting(false);
           };

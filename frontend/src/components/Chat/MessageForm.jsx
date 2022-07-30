@@ -1,15 +1,18 @@
 import React, { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import filter from 'leo-profanity';
 import { AuthorizationContext } from '../../contexts/AuthorizationContext.js';
 import { SocketContext } from '../../contexts/SocketContext.js';
+import { currentChannelIdSelector } from '../../store/slices/channels.js';
 
-export const MessageForm = ({ currentChannelId }) => {
+export const MessageForm = () => {
   const { t } = useTranslation();
   const { addMessageSocket } = useContext(SocketContext);
   const { getUsername } = useContext(AuthorizationContext);
+  const currentChannelId = useSelector(currentChannelIdSelector);
 
   const formik = useFormik({
     initialValues: {

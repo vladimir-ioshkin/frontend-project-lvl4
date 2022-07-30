@@ -9,3 +9,6 @@ start-backend:
 
 deploy:
 	git push heroku main
+
+lint:
+	make -C frontend lint

@@ -1,5 +1,5 @@
 ### Hexlet tests and linter status:
-[![Actions Status](https://github.com/vladimir-ioshkin/frontend-project-lvl4/workflows/hexlet-check/badge.svg)](https://github.com/vladimir-ioshkin/frontend-project-lvl4/actions)
+[![Actions Status](https://github.com/vladimir-ioshkin/frontend-project-lvl4/workflows/hexlet-check/badge.svg)](https://github.com/vladimir-ioshkin/frontend-project-lvl4/actions) [![Actions Status](https://github.com/vladimir-ioshkin/frontend-project-lvl4/workflows/linter/badge.svg)](https://github.com/vladimir-ioshkin/frontend-project-lvl4/actions)
 
 ### Maintainability codeclimate status:
 [![Maintainability](https://api.codeclimate.com/v1/badges/2ba9d70a16490db25726/maintainability)](https://codeclimate.com/github/vladimir-ioshkin/frontend-project-lvl4/maintainability)

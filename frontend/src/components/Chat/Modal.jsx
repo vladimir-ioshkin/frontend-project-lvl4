@@ -6,11 +6,11 @@ import { toast } from 'react-toastify';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import filter from 'leo-profanity';
-import { SocketContext } from '../../contexts/SocketContext.js';
+import SocketContext from '../../contexts/SocketContext.js';
 import { selectors, setCurrentChannelId } from '../../store/slices/channels.js';
 import { modalIsOpenSelector, modalChannelSelector, closeModal } from '../../store/slices/modal.js';
 
-export const Modal = () => {
+const Modal = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { addChannelSocket, removeChannelSocket, renameChannelSocket } = useContext(SocketContext);
@@ -135,3 +135,5 @@ export const Modal = () => {
     </BootstrapModal>
   );
 };
+
+export default Modal;

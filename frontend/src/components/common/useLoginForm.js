@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import { useRollbar } from '@rollbar/react';
-import { AuthorizationContext } from '../../contexts/AuthorizationContext.js';
+import AuthorizationContext from '../../contexts/AuthorizationContext.js';
 import { pages } from '../../routes.js';
 
-export const useLoginForm = ({
+const useLoginForm = ({
   initialValues, validationSchema, path, errorCode,
 }) => {
   const navigate = useNavigate();
@@ -48,3 +48,5 @@ export const useLoginForm = ({
     setIsError,
   ]);
 };
+
+export default useLoginForm;

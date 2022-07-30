@@ -1,9 +1,11 @@
 import React from 'react';
-import { AuthorizationForm } from './AuthorizationForm.jsx';
-import { CardForm } from '../common/CardForm.jsx';
+import AuthorizationForm from './AuthorizationForm.jsx';
+import CardForm from '../common/CardForm.jsx';
 
-export const Authorization = () => (
+const Authorization = () => (
   <CardForm isAuthorization>
     <AuthorizationForm />
   </CardForm>
 );
+
+export default Authorization;

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Container, Navbar } from 'react-bootstrap';
-import { AuthorizationContext } from '../../contexts/AuthorizationContext.js';
+import AuthorizationContext from '../../contexts/AuthorizationContext.js';
 
-export const Header = () => {
+const Header = () => {
   const { t } = useTranslation();
   const { isLogged, logOut } = useContext(AuthorizationContext);
 
@@ -16,3 +16,5 @@ export const Header = () => {
     </Navbar>
   );
 };
+
+export default Header;

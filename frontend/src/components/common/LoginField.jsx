@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, FloatingLabel } from 'react-bootstrap';
 
-export const LoginField = ({
+const LoginField = ({
   label, value, isInvalid, errorText, onChange,
 }) => (
   <Form.Group className="form-floating mb-3">
@@ -22,3 +22,5 @@ export const LoginField = ({
     </FloatingLabel>
   </Form.Group>
 );
+
+export default LoginField;

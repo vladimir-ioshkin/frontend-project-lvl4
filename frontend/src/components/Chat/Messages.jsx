@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { Col } from 'react-bootstrap';
 import { currentChannelMessagesSelector } from '../../store/slices/messages.js';
 import { currentChannelSelector } from '../../store/slices/channels.js';
-import { MessageItem } from './MessageItem.jsx';
-import { MessageForm } from './MessageForm.jsx';
+import MessageItem from './MessageItem.jsx';
+import MessageForm from './MessageForm.jsx';
 
-export const Messages = () => {
+const Messages = () => {
   const { t } = useTranslation();
   const messages = useSelector(currentChannelMessagesSelector);
   const currentChannel = useSelector(currentChannelSelector);
@@ -39,3 +39,5 @@ export const Messages = () => {
     </Col>
   );
 };
+
+export default Messages;

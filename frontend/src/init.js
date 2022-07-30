@@ -2,9 +2,9 @@ import React from 'react';
 import filter from 'leo-profanity';
 import { setI18n } from './i18n.js';
 import { initSocket } from './socket.js';
-import { App } from './components/App.jsx';
+import App from './components/App.jsx';
 
-export const init = () => {
+const init = () => {
   setI18n();
   filter.loadDictionary('ru');
 
@@ -16,3 +16,5 @@ export const init = () => {
 
   return <App actions={actions} rollbarConfig={rollbarConfig} />;
 };
+
+export default init;

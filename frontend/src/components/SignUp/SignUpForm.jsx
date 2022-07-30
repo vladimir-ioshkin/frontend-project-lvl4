@@ -4,11 +4,11 @@ import { Button, Form } from 'react-bootstrap';
 import * as yup from 'yup';
 import { CONFLICT_ERROR_CODE } from '../../constants.js';
 import { apiRoutes } from '../../routes.js';
-import { LoginField } from '../common/LoginField.jsx';
-import { PasswordField } from '../common/PasswordField.jsx';
-import { useLoginForm } from '../common/useLoginForm.js';
+import LoginField from '../common/LoginField.jsx';
+import PasswordField from '../common/PasswordField.jsx';
+import useLoginForm from '../common/useLoginForm.js';
 
-export const SignUpForm = () => {
+const SignUpForm = () => {
   const { t } = useTranslation();
   const initialValues = {
     username: '',
@@ -75,3 +75,5 @@ export const SignUpForm = () => {
     </Form>
   );
 };
+
+export default SignUpForm;

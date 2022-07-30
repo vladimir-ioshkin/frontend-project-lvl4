@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { Button, Col, Nav } from 'react-bootstrap';
 import { selectors, setDefaultChannel } from '../../store/slices/channels.js';
 import { openModal } from '../../store/slices/modal.js';
-import { ChannelItem } from './ChannelItem.jsx';
+import ChannelItem from './ChannelItem.jsx';
 
-export const Channels = () => {
+const Channels = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -17,7 +17,7 @@ export const Channels = () => {
     if (channels.length) {
       dispatch(setDefaultChannel());
     }
-  }, [channels]);
+  }, [channels, dispatch]);
 
   return (
     <Col className="col-4 col-md-2 border-end pt-5 px-0 bg-light">
@@ -43,3 +43,5 @@ export const Channels = () => {
     </Col>
   );
 };
+
+export default Channels;

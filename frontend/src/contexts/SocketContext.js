@@ -1,8 +1,10 @@
 import { createContext } from 'react';
 
-export const SocketContext = createContext({
+const SocketContext = createContext({
   addMessageSocket: () => {},
   addChannelSocket: () => {},
   removeChannelSocket: () => {},
   renameChannelSocket: () => {},
 });
+
+export default SocketContext;

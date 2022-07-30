@@ -10,7 +10,7 @@ import {
 import { openModal } from '../../store/slices/modal.js';
 import { setCurrentChannelId, currentChannelIdSelector } from '../../store/slices/channels.js';
 
-export const ChannelItem = ({ name, removable, id }) => {
+const ChannelItem = ({ name, removable, id }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const currentChannelId = useSelector(currentChannelIdSelector);
@@ -46,3 +46,5 @@ export const ChannelItem = ({ name, removable, id }) => {
     </Nav.Item>
   );
 };
+
+export default ChannelItem;

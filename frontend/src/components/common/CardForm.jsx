@@ -7,7 +7,7 @@ import {
 import loginImg from '../../images/login.jpeg';
 import signUpImg from '../../images/signup.jpg';
 
-export const CardForm = ({ isAuthorization, children }) => {
+const CardForm = ({ isAuthorization, children }) => {
   const { t } = useTranslation();
   const img = isAuthorization ? loginImg : signUpImg;
 
@@ -37,3 +37,5 @@ export const CardForm = ({ isAuthorization, children }) => {
     </Container>
   );
 };
+
+export default CardForm;

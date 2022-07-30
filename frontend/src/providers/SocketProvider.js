@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
-import { SocketContext } from '../contexts/SocketContext.js';
+import SocketContext from '../contexts/SocketContext.js';
 
-export const SocketProvider = ({ actions, children }) => {
+const SocketProvider = ({ actions, children }) => {
   const {
     addMessageSocket,
     addChannelSocket,
@@ -27,3 +27,5 @@ export const SocketProvider = ({ actions, children }) => {
     </SocketContext.Provider>
   );
 };
+
+export default SocketProvider;

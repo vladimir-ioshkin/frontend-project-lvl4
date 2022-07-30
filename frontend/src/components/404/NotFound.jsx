@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Col, Image, Row } from 'react-bootstrap';
 import pageNotFoundImg from '../../images/pageNotFound.jpg';
 
-export const NotFound = () => {
+const NotFound = () => {
   const { t } = useTranslation();
 
   return (
@@ -23,3 +23,5 @@ export const NotFound = () => {
     </Row>
   );
 };
+
+export default NotFound;

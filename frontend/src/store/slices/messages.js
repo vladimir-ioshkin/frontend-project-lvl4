@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSelector, createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 import { getDataRequest } from '../thunks/index.js';
 import { currentChannelIdSelector } from './channels.js';

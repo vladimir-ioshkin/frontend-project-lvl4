@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { AuthorizationContext } from '../contexts/AuthorizationContext.js';
+import AuthorizationContext from '../contexts/AuthorizationContext.js';
 
-export const AuthorizationProvider = ({ children }) => {
+const AuthorizationProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(Boolean(localStorage.getItem('user')));
 
   const logIn = ({ token, username }) => {
@@ -34,3 +34,5 @@ export const AuthorizationProvider = ({ children }) => {
     </AuthorizationContext.Provider>
   );
 };
+
+export default AuthorizationProvider;

@@ -5,15 +5,15 @@ import { Container, Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { useRollbar } from '@rollbar/react';
 import { useTranslation } from 'react-i18next';
-import { AuthorizationContext } from '../../contexts/AuthorizationContext.js';
+import AuthorizationContext from '../../contexts/AuthorizationContext.js';
 import { pages } from '../../routes.js';
 import { getDataRequest } from '../../store/thunks/index.js';
 import { errorCodeSelector, errorSelector } from '../../store/slices/applicationStatus';
-import { Channels } from './Channels.jsx';
-import { Messages } from './Messages.jsx';
+import Channels from './Channels.jsx';
+import Messages from './Messages.jsx';
 import { AUTH_ERROR_CODE } from '../../constants.js';
 
-export const Chat = () => {
+const Chat = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ export const Chat = () => {
     }
 
     dispatch(getDataRequest());
-  }, [isLogged]);
+  }, [isLogged, dispatch, logOut, navigate]);
 
   useEffect(() => {
     if (!errorCode) return;
@@ -43,7 +43,7 @@ export const Chat = () => {
 
     toast.error(t(errorCode));
     rollbar.error(t(errorCode), error);
-  }, [errorCode]);
+  }, [errorCode, error, logOut, navigate, rollbar, t]);
 
   return (
     <Container className="h-100 my-4 overflow-hidden rounded shadow">
@@ -54,3 +54,5 @@ export const Chat = () => {
     </Container>
   );
 };
+
+export default Chat;

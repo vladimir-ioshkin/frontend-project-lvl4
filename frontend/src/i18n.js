@@ -1,6 +1,6 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import resources from './languages/index.js';
+import resources from './languages/index';
 import store from './store';
 
 const setI18n = () => {

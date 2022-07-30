@@ -1,6 +1,6 @@
 import React from 'react';
-import AuthorizationForm from './AuthorizationForm.jsx';
-import CardForm from '../common/CardForm.jsx';
+import AuthorizationForm from './AuthorizationForm';
+import CardForm from '../common/CardForm';
 
 const Authorization = () => (
   <CardForm isAuthorization>

@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import { useRollbar } from '@rollbar/react';
-import AuthorizationContext from '../../contexts/AuthorizationContext.js';
-import { pages } from '../../routes.js';
+import AuthorizationContext from '../../contexts/AuthorizationContext';
+import { pages } from '../../routes';
 
 const useLoginForm = ({
   initialValues, validationSchema, path, errorCode,

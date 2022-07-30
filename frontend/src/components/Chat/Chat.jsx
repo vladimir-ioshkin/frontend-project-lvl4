@@ -5,13 +5,13 @@ import { Container, Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { useRollbar } from '@rollbar/react';
 import { useTranslation } from 'react-i18next';
-import AuthorizationContext from '../../contexts/AuthorizationContext.js';
-import { pages } from '../../routes.js';
-import { getDataRequest } from '../../store/thunks/index.js';
+import AuthorizationContext from '../../contexts/AuthorizationContext';
+import { pages } from '../../routes';
+import getDataRequest from '../../store/thunks/getDataRequest';
 import { errorCodeSelector, errorSelector } from '../../store/slices/applicationStatus';
-import Channels from './Channels.jsx';
-import Messages from './Messages.jsx';
-import { AUTH_ERROR_CODE } from '../../constants.js';
+import Channels from './Channels';
+import Messages from './Messages';
+import { AUTH_ERROR_CODE } from '../../constants';
 
 const Chat = () => {
   const navigate = useNavigate();

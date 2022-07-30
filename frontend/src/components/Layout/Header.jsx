@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Container, Navbar } from 'react-bootstrap';
-import AuthorizationContext from '../../contexts/AuthorizationContext.js';
+import AuthorizationContext from '../../contexts/AuthorizationContext';
 
 const Header = () => {
   const { t } = useTranslation();

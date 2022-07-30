@@ -2,11 +2,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Form } from 'react-bootstrap';
 import * as yup from 'yup';
-import { apiRoutes } from '../../routes.js';
-import { AUTH_ERROR_CODE } from '../../constants.js';
-import LoginField from '../common/LoginField.jsx';
-import PasswordField from '../common/PasswordField.jsx';
-import useLoginForm from '../common/useLoginForm.js';
+import { apiRoutes } from '../../routes';
+import { AUTH_ERROR_CODE } from '../../constants';
+import LoginField from '../common/LoginField';
+import PasswordField from '../common/PasswordField';
+import useLoginForm from '../common/useLoginForm';
 
 const AuthorizationForm = () => {
   const { t } = useTranslation();

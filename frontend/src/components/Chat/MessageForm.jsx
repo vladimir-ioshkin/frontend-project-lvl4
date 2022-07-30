@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { Button, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import filter from 'leo-profanity';
-import AuthorizationContext from '../../contexts/AuthorizationContext.js';
-import SocketContext from '../../contexts/SocketContext.js';
-import { currentChannelIdSelector } from '../../store/slices/channels.js';
+import AuthorizationContext from '../../contexts/AuthorizationContext';
+import SocketContext from '../../contexts/SocketContext';
+import { currentChannelIdSelector } from '../../store/slices/channels';
 
 const MessageForm = () => {
   const { t } = useTranslation();

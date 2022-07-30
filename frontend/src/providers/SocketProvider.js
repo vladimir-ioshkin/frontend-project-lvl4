@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import SocketContext from '../contexts/SocketContext.js';
+import SocketContext from '../contexts/SocketContext';
 
 const SocketProvider = ({ actions, children }) => {
   const {

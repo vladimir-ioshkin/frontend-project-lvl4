@@ -1,8 +1,8 @@
 import React from 'react';
 import filter from 'leo-profanity';
-import { setI18n } from './i18n.js';
-import initSocket from './socket.js';
-import App from './components/App.jsx';
+import { setI18n } from './i18n';
+import initSocket from './socket';
+import App from './components/App';
 
 const init = () => {
   setI18n();

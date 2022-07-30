@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import AuthorizationContext from '../contexts/AuthorizationContext.js';
+import AuthorizationContext from '../contexts/AuthorizationContext';
 
 const AuthorizationProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(Boolean(localStorage.getItem('user')));

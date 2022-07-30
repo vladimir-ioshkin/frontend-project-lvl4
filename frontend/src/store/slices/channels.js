@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSelector, createSlice, createEntityAdapter } from '@reduxjs/toolkit';
-import getDataRequest from '../thunks/getDataRequest.js';
+import getDataRequest from '../thunks/getDataRequest';
 
 const DEFAULT_CHANNEL_ID = 1;
 

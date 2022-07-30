@@ -6,9 +6,9 @@ import { toast } from 'react-toastify';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import filter from 'leo-profanity';
-import SocketContext from '../../contexts/SocketContext.js';
-import { selectors, setCurrentChannelId } from '../../store/slices/channels.js';
-import { modalIsOpenSelector, modalChannelSelector, closeModal } from '../../store/slices/modal.js';
+import SocketContext from '../../contexts/SocketContext';
+import { selectors, setCurrentChannelId } from '../../store/slices/channels';
+import { modalIsOpenSelector, modalChannelSelector, closeModal } from '../../store/slices/modal';
 
 const Modal = () => {
   const dispatch = useDispatch();
@@ -96,6 +96,7 @@ const Modal = () => {
         <BootstrapModal.Title>{config[action].title}</BootstrapModal.Title>
       </BootstrapModal.Header>
 
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Formik {...config[action].formProps} validateOnBlur={false}>
         {(formik) => (
           <Form onSubmit={formik.handleSubmit}>

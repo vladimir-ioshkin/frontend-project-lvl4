@@ -7,8 +7,8 @@ import {
   Nav,
   ButtonGroup,
 } from 'react-bootstrap';
-import { openModal } from '../../store/slices/modal.js';
-import { setCurrentChannelId, currentChannelIdSelector } from '../../store/slices/channels.js';
+import { openModal } from '../../store/slices/modal';
+import { setCurrentChannelId, currentChannelIdSelector } from '../../store/slices/channels';
 
 const ChannelItem = ({ name, removable, id }) => {
   const { t } = useTranslation();

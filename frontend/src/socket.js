@@ -5,7 +5,7 @@ import {
 } from './store/slices/channels';
 import store from './store';
 
-export const initSocket = () => {
+const initSocket = () => {
   const socket = io();
 
   socket.on('newMessage', (payload) => {
@@ -53,3 +53,5 @@ export const initSocket = () => {
     renameChannelSocket,
   };
 };
+
+export default initSocket;

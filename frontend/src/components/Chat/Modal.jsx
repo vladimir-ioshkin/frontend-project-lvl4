@@ -105,12 +105,14 @@ export const Modal = () => {
               )
                 : (
                   <Form.Group className="mb-2 modal-input-block">
+                    <Form.Label htmlFor="name" className="visually-hidden">{t('modal.inputLabel')}</Form.Label>
                     <Form.Control
                       ref={inputEl}
                       name="name"
-                      onChange={formik.handleChange}
-                      {...formik.getFieldProps('name')}
+                      id="name"
+                      value={formik.values.name}
                       isInvalid={formik.touched.name && formik.errors.name}
+                      onChange={formik.handleChange}
                     />
                     <Form.Control.Feedback type="invalid">{formik.errors.name}</Form.Control.Feedback>
                   </Form.Group>

@@ -30,7 +30,9 @@ export const ChannelItem = ({ name, removable, id }) => {
   const dropdown = (
     <Dropdown as={ButtonGroup} className={classes}>
       {btn}
-      <Dropdown.Toggle split id={id} variant={variant} />
+      <Dropdown.Toggle split id={id} variant={variant}>
+        <span className="visually-hidden">{t('chat.channelControl')}</span>
+      </Dropdown.Toggle>
       <Dropdown.Menu>
         <Dropdown.Item eventKey="remove" variant="light" onClick={removeChannel}>{t('modal.removeBtn')}</Dropdown.Item>
         <Dropdown.Item eventKey="rename" variant="light" onClick={renameChannel}>{t('modal.renameBtn')}</Dropdown.Item>

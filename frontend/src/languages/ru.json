@@ -23,11 +23,13 @@
 
     "chat": {
       "channels": "Каналы",
+      "channelControl": "Управление каналом",
       "messages": {
         "key_one": "{{count}} сообщение",
         "key_few": "{{count}} сообщения",
         "key_many": "{{count}} сообщений",
-        "placeholder": "Введите сообщение..."
+        "placeholder": "Введите сообщение...",
+        "label": "Новое сообщение"
       }
     },
 
@@ -52,10 +54,11 @@
     },
 
     "modal": {
+      "inputLabel": "Имя канала",
       "removeTitle": "Удалить канал",
       "removeBtn": "Удалить",
       "removeText": "Уверены?",
-      "removeNotify": "Канал удален",
+      "removeNotify": "Канал удалён",
       "renameTitle": "Переименовать канал",
       "renameBtn": "Переименовать",
       "renameNotify": "Канал переименован",

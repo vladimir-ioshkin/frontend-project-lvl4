@@ -40,6 +40,7 @@ export const MessageForm = () => {
           name="body"
           onChange={formik.handleChange}
           value={formik.values.body}
+          aria-label={t('chat.messages.label')}
         />
         <Button
           type="submit"

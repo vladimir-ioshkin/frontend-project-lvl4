@@ -4,8 +4,25 @@
 ### Maintainability codeclimate status:
 [![Maintainability](https://api.codeclimate.com/v1/badges/2ba9d70a16490db25726/maintainability)](https://codeclimate.com/github/vladimir-ioshkin/frontend-project-lvl4/maintainability)
 
-### Test Coverage codeclimate status:
-[![Test Coverage](https://api.codeclimate.com/v1/badges/2ba9d70a16490db25726/test_coverage)](https://codeclimate.com/github/vladimir-ioshkin/frontend-project-lvl4/test_coverage)
+# Hexlet Chat
+Real-time приложение на React, реализующее функционал чата с возможностью создания и управлениями каналами. Реализовано на основе протокола WebSocket.
 
-### Demo:
-https://vladimir-ioshkin-lvl4.herokuapp.com/
+### [Demo](https://vladimir-ioshkin-lvl4.herokuapp.com/)
+
+## Функционал приложения:
+- Регистрация и аутентификация пользователей
+- Управление каналами чата
+- Мгновенные отправка и получение сообщений
+- Фильтрация нецензурных слов
+- Мониторинг ошибок в продакшене
+
+## Основные технологии:
+- Webpack
+- React(react-hooks)
+- Redux
+- reduxjs/toolkit
+- Socket.io
+- Bootstrap
+- Formik
+- i18next
+- Rollbar

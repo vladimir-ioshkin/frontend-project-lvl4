@@ -22,26 +22,25 @@ export const ChannelItem = ({ name, removable, id }) => {
   const variant = id === currentChannelId ? 'secondary' : 'light';
   const displayName = `# ${name}`;
 
-  const btn = removable ? (
+  const btn = (
+    <Button variant={variant} className={classes.concat(' text-truncate')} onClick={handleClick}>
+      {displayName}
+    </Button>
+  );
+  const dropdown = (
     <Dropdown as={ButtonGroup} className={classes}>
-      <Button variant={variant} className={classes.concat(' text-truncate')} onClick={handleClick}>
-        {displayName}
-      </Button>
+      {btn}
       <Dropdown.Toggle split id={id} variant={variant} />
       <Dropdown.Menu>
         <Dropdown.Item eventKey="remove" variant="light" onClick={removeChannel}>{t('modal.removeBtn')}</Dropdown.Item>
         <Dropdown.Item eventKey="rename" variant="light" onClick={renameChannel}>{t('modal.renameBtn')}</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-  ) : (
-    <Button variant={variant} className={classes.concat(' text-truncate')} onClick={handleClick}>
-      {displayName}
-    </Button>
   );
 
   return (
     <Nav.Item className="w-100">
-      {btn}
+      {removable ? dropdown : btn}
     </Nav.Item>
   );
 };

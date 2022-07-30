@@ -18,14 +18,15 @@ export const CardForm = ({ isAuthorization, children }) => {
           <Card className="shadow-sm">
             <Card.Body className="row p-5">
               <Col className="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                <Image src={img} alt="" className="rounded-circle"></Image>
+                <Image src={img} alt="" className="rounded-circle" />
               </Col>
               {children}
             </Card.Body>
             {isAuthorization && (
               <Card.Footer className="text-muted p-4">
                 <div className="text-center">
-                  {t('authorization.footer.text')}{' '}
+                  {t('authorization.footer.text')}
+                  {' '}
                   <Link to="/signup">{t('authorization.footer.link')}</Link>
                 </div>
               </Card.Footer>

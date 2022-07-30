@@ -14,9 +14,11 @@ export const LoginField = ({
         isInvalid={isInvalid}
         autoFocus
       />
-      {errorText && <Form.Control.Feedback type="invalid">
+      {errorText && (
+      <Form.Control.Feedback type="invalid">
         {errorText}
-      </Form.Control.Feedback>}
+      </Form.Control.Feedback>
+      )}
     </FloatingLabel>
   </Form.Group>
 );

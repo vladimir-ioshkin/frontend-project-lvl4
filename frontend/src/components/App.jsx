@@ -34,10 +34,10 @@ export const App = ({ actions, rollbarConfig }) => {
                   <div className="d-flex flex-column h-100">
                     <Header />
                     <Routes>
-                      <Route path={login} element={<Authorization />}></Route>
-                      <Route path={chat} element={<Chat />}></Route>
-                      <Route path={signup} element={<SignUp />}></Route>
-                      <Route path="*" element={<NotFound />}></Route>
+                      <Route path={login} element={<Authorization />} />
+                      <Route path={chat} element={<Chat />} />
+                      <Route path={signup} element={<SignUp />} />
+                      <Route path="*" element={<NotFound />} />
                     </Routes>
                   </div>
                   <ToastContainer position="top-right" limit={3} />

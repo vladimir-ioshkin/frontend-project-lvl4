@@ -11,11 +11,12 @@ export const NotFound = () => {
     <Row className="justify-content-center align-content-center h-100">
       <Col className="col-12 col-md-8 col-xxl-6 text-center d-flex flex-column align-items-center">
         <div className="rounded-circle overflow-hidden m-5" style={{ width: '360px', height: '360px' }}>
-          <Image src={pageNotFoundImg} alt={t('notFound.title')}></Image>
+          <Image src={pageNotFoundImg} alt={t('notFound.title')} />
         </div>
         <h1 className="h4 text-muted">{t('notFound.title')}</h1>
         <p className="text-muted">
-          {t('notFound.text')}{' '}
+          {t('notFound.text')}
+          {' '}
           <Link to="/">{t('notFound.link')}</Link>
         </p>
       </Col>

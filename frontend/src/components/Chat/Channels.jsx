@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, Col, Nav } from 'react-bootstrap';
-import { selectors, setDefaultChannel } from '../../store/slices/channels.js';
-import { openModal } from '../../store/slices/modal.js';
-import ChannelItem from './ChannelItem.jsx';
+import { selectors, setDefaultChannel } from '../../store/slices/channels';
+import { openModal } from '../../store/slices/modal';
+import ChannelItem from './ChannelItem';
 
 const Channels = () => {
   const { t } = useTranslation();

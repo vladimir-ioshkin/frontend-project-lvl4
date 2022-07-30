@@ -2,11 +2,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Form } from 'react-bootstrap';
 import * as yup from 'yup';
-import { CONFLICT_ERROR_CODE } from '../../constants.js';
-import { apiRoutes } from '../../routes.js';
-import LoginField from '../common/LoginField.jsx';
-import PasswordField from '../common/PasswordField.jsx';
-import useLoginForm from '../common/useLoginForm.js';
+import { CONFLICT_ERROR_CODE } from '../../constants';
+import { apiRoutes } from '../../routes';
+import LoginField from '../common/LoginField';
+import PasswordField from '../common/PasswordField';
+import useLoginForm from '../common/useLoginForm';
 
 const SignUpForm = () => {
   const { t } = useTranslation();

@@ -2,10 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Col } from 'react-bootstrap';
-import { currentChannelMessagesSelector } from '../../store/slices/messages.js';
-import { currentChannelSelector } from '../../store/slices/channels.js';
-import MessageItem from './MessageItem.jsx';
-import MessageForm from './MessageForm.jsx';
+import { currentChannelMessagesSelector } from '../../store/slices/messages';
+import { currentChannelSelector } from '../../store/slices/channels';
+import MessageItem from './MessageItem';
+import MessageForm from './MessageForm';
 
 const Messages = () => {
   const { t } = useTranslation();

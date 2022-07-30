@@ -1,6 +1,6 @@
 import React from 'react';
-import CardForm from '../common/CardForm.jsx';
-import SignUpForm from './SignUpForm.jsx';
+import CardForm from '../common/CardForm';
+import SignUpForm from './SignUpForm';
 
 const SignUp = () => (
   <CardForm>

@@ -8,17 +8,17 @@ import { Provider as StoreProvider } from 'react-redux';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 import { I18nextProvider } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
-import AuthorizationProvider from '../providers/AuthorizationProvider.js';
-import SocketProvider from '../providers/SocketProvider.js';
-import store from '../store/index.js';
-import { pages } from '../routes.js';
-import { i18n } from '../i18n.js';
-import Authorization from './Authorization/Authorization.jsx';
-import Chat from './Chat/Chat.jsx';
-import Header from './Layout/Header.jsx';
-import NotFound from './404/NotFound.jsx';
-import SignUp from './SignUp/SignUp.jsx';
-import Modal from './Chat/Modal.jsx';
+import AuthorizationProvider from '../providers/AuthorizationProvider';
+import SocketProvider from '../providers/SocketProvider';
+import store from '../store/index';
+import { pages } from '../routes';
+import { i18n } from '../i18n';
+import Authorization from './Authorization/Authorization';
+import Chat from './Chat/Chat';
+import Header from './Layout/Header';
+import NotFound from './404/NotFound';
+import SignUp from './SignUp/SignUp';
+import Modal from './Chat/Modal';
 
 const App = ({ actions, rollbarConfig }) => {
   const { login, chat, signup } = pages;

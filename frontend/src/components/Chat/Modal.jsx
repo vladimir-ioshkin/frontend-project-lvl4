@@ -7,7 +7,9 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import filter from 'leo-profanity';
 import SocketContext from '../../contexts/SocketContext';
-import { selectors, setCurrentChannelId } from '../../store/slices/channels';
+import {
+  currentChannelIdSelector, selectors, setCurrentChannelId, setDefaultChannel,
+} from '../../store/slices/channels';
 import { modalIsOpenSelector, modalChannelSelector, closeModal } from '../../store/slices/modal';
 
 const Modal = () => {
@@ -16,6 +18,7 @@ const Modal = () => {
   const { addChannelSocket, removeChannelSocket, renameChannelSocket } = useContext(SocketContext);
   const isOpen = useSelector(modalIsOpenSelector);
   const { action, id, name: currentName } = useSelector(modalChannelSelector);
+  const currentChannelId = useSelector(currentChannelIdSelector);
   const channels = useSelector(selectors.selectAll);
   const inputEl = useRef();
 
@@ -43,10 +46,14 @@ const Modal = () => {
         initialValues: { name: '' },
         validationSchema: schema,
         onSubmit: async ({ name }, { resetForm, setSubmitting }) => {
-          const callback = ({ data }) => {
-            toast.success(t('modal.addNotify'));
+          const callback = ({ data, status }) => {
+            if (status === 'ok') {
+              toast.success(t('modal.addNotify'));
+              dispatch(setCurrentChannelId({ id: data.id }));
+            } else {
+              toast.error(t('errors.server'));
+            }
             handleClose();
-            dispatch(setCurrentChannelId({ id: data.id }));
             resetForm();
             setSubmitting(false);
           };
@@ -61,8 +68,15 @@ const Modal = () => {
       formProps: {
         initialValues: {},
         onSubmit: async (_, { setSubmitting }) => {
-          const callback = () => {
-            toast.success(t('modal.removeNotify'));
+          const callback = ({ status }) => {
+            if (status === 'ok') {
+              if (currentChannelId === id) {
+                dispatch(setDefaultChannel());
+              }
+              toast.success(t('modal.removeNotify'));
+            } else {
+              toast.error(t('errors.server'));
+            }
             handleClose();
             setSubmitting(false);
           };
@@ -78,8 +92,12 @@ const Modal = () => {
         initialValues: { name: currentName },
         validationSchema: schema,
         onSubmit: async ({ name }, { resetForm, setSubmitting }) => {
-          const callback = () => {
-            toast.success(t('modal.renameNotify'));
+          const callback = ({ status }) => {
+            if (status === 'ok') {
+              toast.success(t('modal.renameNotify'));
+            } else {
+              toast.error(t('errors.server'));
+            }
             handleClose();
             resetForm();
             setSubmitting(false);

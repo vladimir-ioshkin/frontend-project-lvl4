@@ -1,8 +1,6 @@
 import { io } from 'socket.io-client';
 import { addMessage } from './store/slices/messages';
-import {
-  addChannel, removeChannel, renameChannel, setDefaultChannel,
-} from './store/slices/channels';
+import { addChannel, removeChannel, renameChannel } from './store/slices/channels';
 import store from './store';
 
 const initSocket = () => {
@@ -18,12 +16,6 @@ const initSocket = () => {
 
   socket.on('removeChannel', ({ id }) => {
     store.dispatch(removeChannel(id));
-
-    const { channels: { currentChannelId } } = store.getState();
-
-    if (currentChannelId === id) {
-      store.dispatch(setDefaultChannel());
-    }
   });
 
   socket.on('renameChannel', ({ id, name }) => {

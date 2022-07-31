@@ -2,22 +2,22 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, Col, Nav } from 'react-bootstrap';
-import { selectors, setDefaultChannel } from '../../store/slices/channels';
+import { selectors, setDefaultChannel, currentChannelIdSelector } from '../../store/slices/channels';
 import { openModal } from '../../store/slices/modal';
 import ChannelItem from './ChannelItem';
 
 const Channels = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
   const channels = useSelector(selectors.selectAll);
+  const currentChannelId = useSelector(currentChannelIdSelector);
   const handleClick = () => dispatch(openModal({ action: 'add' }));
 
   useEffect(() => {
-    if (channels.length) {
+    if (channels.length && !currentChannelId) {
       dispatch(setDefaultChannel());
     }
-  }, [channels, dispatch]);
+  }, [channels, dispatch, currentChannelId]);
 
   return (
     <Col className="col-4 col-md-2 border-end pt-5 px-0 bg-light">

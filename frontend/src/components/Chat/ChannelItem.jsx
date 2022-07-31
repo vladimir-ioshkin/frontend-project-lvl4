@@ -9,6 +9,7 @@ import {
 } from 'react-bootstrap';
 import { openModal } from '../../store/slices/modal';
 import { setCurrentChannelId, currentChannelIdSelector } from '../../store/slices/channels';
+import { MODAL_REMOVE, MODAL_RENAME } from '../../constants';
 
 const ChannelItem = ({ name, removable, id }) => {
   const { t } = useTranslation();
@@ -16,8 +17,8 @@ const ChannelItem = ({ name, removable, id }) => {
   const currentChannelId = useSelector(currentChannelIdSelector);
 
   const handleClick = () => dispatch(setCurrentChannelId({ id }));
-  const removeChannel = () => dispatch(openModal({ action: 'remove', id }));
-  const renameChannel = () => dispatch(openModal({ action: 'rename', id, name }));
+  const removeChannel = () => dispatch(openModal({ action: MODAL_REMOVE, id }));
+  const renameChannel = () => dispatch(openModal({ action: MODAL_RENAME, id, name }));
   const classes = 'w-100 rounded-0 text-start';
   const variant = id === currentChannelId ? 'secondary' : 'light';
   const displayName = `# ${name}`;

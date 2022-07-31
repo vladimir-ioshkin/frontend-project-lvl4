@@ -1,10 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
+import { MODAL_ADD } from '../../constants';
 
 const initialState = {
   isOpen: false,
   channelData: {
-    action: 'add',
+    action: MODAL_ADD,
     id: null,
     name: '',
   },

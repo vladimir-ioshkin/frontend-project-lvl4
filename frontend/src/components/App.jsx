@@ -18,7 +18,7 @@ import Chat from './Chat/Chat';
 import Header from './Layout/Header';
 import NotFound from './404/NotFound';
 import SignUp from './SignUp/SignUp';
-import Modal from './Chat/Modal';
+import Modal from './Modal/Modal';
 
 const App = ({ actions, rollbarConfig }) => {
   const { login, chat, signup } = pages;

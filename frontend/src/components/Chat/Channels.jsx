@@ -5,13 +5,14 @@ import { Button, Col, Nav } from 'react-bootstrap';
 import { selectors, setDefaultChannel, currentChannelIdSelector } from '../../store/slices/channels';
 import { openModal } from '../../store/slices/modal';
 import ChannelItem from './ChannelItem';
+import { MODAL_ADD } from '../../constants';
 
 const Channels = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const channels = useSelector(selectors.selectAll);
   const currentChannelId = useSelector(currentChannelIdSelector);
-  const handleClick = () => dispatch(openModal({ action: 'add' }));
+  const handleClick = () => dispatch(openModal({ action: MODAL_ADD }));
 
   useEffect(() => {
     if (channels.length && !currentChannelId) {

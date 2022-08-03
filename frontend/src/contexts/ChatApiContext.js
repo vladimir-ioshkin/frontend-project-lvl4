@@ -1,10 +1,10 @@
 import { createContext } from 'react';
 
-const SocketContext = createContext({
+const ChatApiContext = createContext({
   addMessageSocket: () => {},
   addChannelSocket: () => {},
   removeChannelSocket: () => {},
   renameChannelSocket: () => {},
 });
 
-export default SocketContext;
+export default ChatApiContext;

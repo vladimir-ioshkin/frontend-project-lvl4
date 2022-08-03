@@ -5,12 +5,12 @@ import { Button, Form } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import filter from 'leo-profanity';
 import AuthorizationContext from '../../contexts/AuthorizationContext';
-import SocketContext from '../../contexts/SocketContext';
+import ChatApiContext from '../../contexts/ChatApiContext';
 import { currentChannelIdSelector } from '../../store/slices/channels';
 
 const MessageForm = () => {
   const { t } = useTranslation();
-  const { addMessageSocket } = useContext(SocketContext);
+  const { addMessageSocket } = useContext(ChatApiContext);
   const { getUsername } = useContext(AuthorizationContext);
   const currentChannelId = useSelector(currentChannelIdSelector);
 

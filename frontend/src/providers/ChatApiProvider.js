@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
-import SocketContext from '../contexts/SocketContext';
+import ChatApiContext from '../contexts/ChatApiContext';
 
-const SocketProvider = ({ actions, children }) => {
+const ChatApiProvider = ({ actions, children }) => {
   const {
     addMessageSocket,
     addChannelSocket,
@@ -22,10 +22,10 @@ const SocketProvider = ({ actions, children }) => {
   ]);
 
   return (
-    <SocketContext.Provider value={value}>
+    <ChatApiContext.Provider value={value}>
       {children}
-    </SocketContext.Provider>
+    </ChatApiContext.Provider>
   );
 };
 
-export default SocketProvider;
+export default ChatApiProvider;

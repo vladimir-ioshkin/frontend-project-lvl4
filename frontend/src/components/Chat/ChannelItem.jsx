@@ -35,8 +35,8 @@ const ChannelItem = ({ name, removable, id }) => {
         <span className="visually-hidden">{t('chat.channelControl')}</span>
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        <Dropdown.Item eventKey="remove" variant="light" onClick={removeChannel}>{t('modal.removeBtn')}</Dropdown.Item>
-        <Dropdown.Item eventKey="rename" variant="light" onClick={renameChannel}>{t('modal.renameBtn')}</Dropdown.Item>
+        <Dropdown.Item eventKey="remove" onClick={removeChannel} active={false}>{t('modal.removeBtn')}</Dropdown.Item>
+        <Dropdown.Item eventKey="rename" onClick={renameChannel} active={false}>{t('modal.renameBtn')}</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import {
   Card, Col, Container, Image, Row,
 } from 'react-bootstrap';
+import { pages } from '../../routes';
 import loginImg from '../../images/login.jpeg';
 import signUpImg from '../../images/signup.jpg';
 
@@ -27,7 +28,7 @@ const CardForm = ({ isAuthorization, children }) => {
                 <div className="text-center">
                   {t('authorization.footer.text')}
                   {' '}
-                  <Link to="/signup">{t('authorization.footer.link')}</Link>
+                  <Link to={pages.signup}>{t('authorization.footer.link')}</Link>
                 </div>
               </Card.Footer>
             )}

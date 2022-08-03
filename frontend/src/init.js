@@ -4,7 +4,7 @@ import { setI18n } from './i18n';
 import initSocket from './socket';
 import App from './components/App';
 
-const init = () => {
+const init = ({ socket }) => {
   setI18n();
   filter.loadDictionary('ru');
 
@@ -12,7 +12,7 @@ const init = () => {
     accessToken: process.env.ROLLBAR_ACCESS_TOKEN,
     environment: 'production',
   };
-  const actions = initSocket();
+  const actions = initSocket(socket);
 
   return <App actions={actions} rollbarConfig={rollbarConfig} />;
 };

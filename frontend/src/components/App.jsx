@@ -9,7 +9,7 @@ import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 import { I18nextProvider } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 import AuthorizationProvider from '../providers/AuthorizationProvider';
-import SocketProvider from '../providers/SocketProvider';
+import ChatApiProvider from '../providers/ChatApiProvider';
 import store from '../store/index';
 import { pages } from '../routes';
 import { i18n } from '../i18n';
@@ -28,7 +28,7 @@ const App = ({ actions, rollbarConfig }) => {
       <ErrorBoundary errorMessage="Error in React render">
         <I18nextProvider i18n={i18n}>
           <StoreProvider store={store}>
-            <SocketProvider actions={actions}>
+            <ChatApiProvider actions={actions}>
               <AuthorizationProvider>
                 <BrowserRouter>
                   <div className="d-flex flex-column h-100">
@@ -44,7 +44,7 @@ const App = ({ actions, rollbarConfig }) => {
                   <Modal />
                 </BrowserRouter>
               </AuthorizationProvider>
-            </SocketProvider>
+            </ChatApiProvider>
           </StoreProvider>
         </I18nextProvider>
       </ErrorBoundary>

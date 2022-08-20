@@ -1,7 +1,12 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Spinner } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { useRollbar } from '@rollbar/react';
 import { useTranslation } from 'react-i18next';
@@ -18,9 +23,12 @@ const Chat = () => {
   const { t } = useTranslation();
   const rollbar = useRollbar();
   const { isLogged, logOut } = useContext(AuthorizationContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getData = useCallback(async () => {
     const { error } = await dispatch(getDataRequest());
+    setIsLoading(false);
+
     if (!error) {
       return;
     }
@@ -46,10 +54,19 @@ const Chat = () => {
 
   return (
     <Container className="h-100 my-4 overflow-hidden rounded shadow">
-      <Row className="h-100 bg-white flex-md-row">
-        <Channels />
-        <Messages />
-      </Row>
+      {!isLoading && (
+        <Row className="h-100 bg-white flex-md-row">
+          <Channels />
+          <Messages />
+        </Row>
+      )}
+      {isLoading && (
+        <div className="d-flex align-items-center justify-content-center h-100">
+          <Spinner animation="border" role="status" variant="primary">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
+      )}
     </Container>
   );
 };

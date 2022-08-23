@@ -18,6 +18,7 @@ Real-time приложение на React, реализующее функцио
 
 ## Основные технологии:
 - Webpack
+- TypeScript
 - React(react-hooks)
 - Redux
 - reduxjs/toolkit

@@ -3,6 +3,10 @@ extends:
   - plugin:react/recommended
   - react-app
   - airbnb
+  - airbnb-typescript
+parserOptions:
+  project:
+    - ./tsconfig.json
 rules:
   react/jsx-filename-extension: 0
   react/function-component-definition: 0
